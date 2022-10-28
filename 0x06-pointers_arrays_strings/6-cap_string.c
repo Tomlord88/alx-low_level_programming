@@ -1,31 +1,34 @@
 #include "main.h"
 
 /**
- * _strncat - concatenates n bytes from a string to another
- * @dest: destination string
- * @src: source string
- * @n: number of bytes of str to concatenate
+ * cap_string - capitalizes everey word of a string
+ * @s: string to modify
  *
- * Return: a pointer to the resulting string dest
+ * Return: the resulting string
  */
-char *_strncat(char *dest, char *src, int n)
+char *cap_string(char *s)
 {
 	int i, j;
 
-	i = 0;
-	j = 0;
+	char spe[13] = {' ', '\t', '\n', ',', ';', '.',
+		'!', '?', '"', '(', ')', '{', '}'};
 
-	while (dest[i] != '\0')
-		i++;
-
-	while (src[j] != '\0' && j < n)
+	for (i = 0; s[i] != '\0'; i++)
 	{
-		dest[i] = src[j];
-		i++;
-		j++;
+		if (i == 0 && s[i] >= 'a' && s[i] <= 'z')
+			s[i] -= 32;
+
+		for (j = 0; j < 13; j++)
+		{
+			if (s[i] == spe[j])
+			{
+				if (s[i + 1] >= 'a' && s[i + 1] <= 'z')
+				{
+					s[i + 1] -= 32;
+				}
+			}
+		}
 	}
 
-	dest[i] = '\0';
-
-	return (dest);
+	return (s);
 }
